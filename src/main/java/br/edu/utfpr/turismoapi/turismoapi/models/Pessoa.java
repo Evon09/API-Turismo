@@ -9,7 +9,9 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
@@ -17,6 +19,8 @@ import lombok.ToString;
 @Setter
 @ToString
 @Entity
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "tb_pessoa")
 public class Pessoa extends BaseModel {
     private String nome;
@@ -35,14 +39,4 @@ public class Pessoa extends BaseModel {
     @OneToMany(mappedBy = "agencia")
     private List<Reserva> reservasAgencia;
 
-
-    public Pessoa(UUID id, LocalDateTime createdAt, LocalDateTime updatedAt, String nome, String email,
-            LocalDateTime nascimento, TipoPessoaEnum tipo, String cpf) {
-        super(id, createdAt, updatedAt);
-        this.nome = nome;
-        this.email = email;
-        this.nascimento = nascimento;
-        this.tipo = tipo;
-        this.cpf = cpf;
-    }
 }

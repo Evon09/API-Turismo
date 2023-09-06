@@ -10,7 +10,9 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
@@ -18,6 +20,8 @@ import lombok.ToString;
 @Setter
 @ToString
 @Entity
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "tb_passeio")
 public class Passeio extends BaseModel{
     @ManyToOne(cascade = CascadeType.ALL)
@@ -30,13 +34,6 @@ public class Passeio extends BaseModel{
     @ManyToMany(mappedBy = "passeios")
     private List<Reserva> reservas;
 
-    public Passeio(UUID id, LocalDateTime createdAt, LocalDateTime updatedAt, Pessoa agencia, double preco,
-            String itinerario, String destino) {
-        super(id, createdAt, updatedAt);
-        this.agencia = agencia;
-        this.preco = preco;
-        this.itinerario = itinerario;
-        this.destino = destino;
-    }
+
     
 }

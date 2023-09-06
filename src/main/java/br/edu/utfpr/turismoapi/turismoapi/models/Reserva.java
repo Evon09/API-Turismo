@@ -12,7 +12,9 @@ import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
@@ -20,6 +22,8 @@ import lombok.ToString;
 @Setter
 @ToString
 @Entity
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "tb_reserva")
 public class Reserva extends BaseModel {
     private LocalDateTime dataInicial;
@@ -44,13 +48,5 @@ public class Reserva extends BaseModel {
     @OneToOne(mappedBy = "reserva")
     private Pagamento pagamento;
 
-    public Reserva(UUID id, LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime dataInicial,
-            LocalDateTime dataFinal, Pessoa cliente, Pessoa agencia) {
-        super(id, createdAt, updatedAt);
-        this.dataInicial = dataInicial;
-        this.dataFinal = dataFinal;
-        this.cliente = cliente;
-        this.agencia = agencia;
-    }
 
 }
