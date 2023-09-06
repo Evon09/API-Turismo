@@ -18,4 +18,5 @@ public class PersonDTO {
     private String nome;
     private String email;
     private LocalDateTime nascimento;
+    private String cpf;
 }
