@@ -17,8 +17,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.edu.utfpr.turismoapi.turismoapi.dto.PessoaDTO;
-import br.edu.utfpr.turismoapi.turismoapi.models.Pessoa;
+import br.edu.utfpr.turismoapi.turismoapi.dto.PersonDTO;
+import br.edu.utfpr.turismoapi.turismoapi.models.Person;
 import br.edu.utfpr.turismoapi.turismoapi.repositories.PersonRepository;
 
 
@@ -29,19 +29,19 @@ public class PersonController {
     PersonRepository personRepository;
 
     @GetMapping(value = {"", "/"})
-    public List<Pessoa> getAll(){
+    public List<Person> getAll(){
         return personRepository.findAll();
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<Object> getById(@PathVariable String id){
-        Optional<Pessoa> personOpt =personRepository.findById(UUID.fromString(id));
+        Optional<Person> personOpt =personRepository.findById(UUID.fromString(id));
         return personOpt.isPresent() ? ResponseEntity.ok(personOpt.get()) : ResponseEntity.notFound().build();
     }
 
     @PostMapping("")
-    public ResponseEntity<Object> create(@RequestBody PessoaDTO personDTO){
-        Pessoa pes = new Pessoa();
+    public ResponseEntity<Object> create(@RequestBody PersonDTO personDTO){
+        Person pes = new Person();
         BeanUtils.copyProperties(personDTO, pes);
 
         try {
