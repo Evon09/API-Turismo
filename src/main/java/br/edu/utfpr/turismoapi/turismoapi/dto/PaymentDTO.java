@@ -15,8 +15,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 public class PaymentDTO {
-    private UUID reservaId; 
+    private UUID reservaId; // Adicione o campo UUID para o ID da reserva (Booking)
     private double valor;
     private LocalDateTime dataPagamento;
-
 }

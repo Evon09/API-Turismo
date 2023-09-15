@@ -2,8 +2,11 @@ package br.edu.utfpr.turismoapi.turismoapi.models;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
@@ -22,7 +25,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @Table(name = "tb_tour")
 public class Tour extends BaseModel{
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name="agencia_id", nullable = false)
     private Person agencia;
 
@@ -30,8 +33,7 @@ public class Tour extends BaseModel{
     private String itinerario;
     private String destino;
     @ManyToMany(mappedBy = "passeios")
+    @JsonIgnore
     private List<Booking> reservas;
 
-
-    
 }

@@ -28,7 +28,7 @@ import br.edu.utfpr.turismoapi.turismoapi.repositories.TourRepository;
 
 
 @RestController
-@RequestMapping("/booking")
+@RequestMapping("/Booking")
 public class BookingController {
     @Autowired
     private BookingRepository bookingRepository;

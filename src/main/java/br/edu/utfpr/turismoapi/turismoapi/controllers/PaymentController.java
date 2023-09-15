@@ -22,12 +22,14 @@ import br.edu.utfpr.turismoapi.turismoapi.models.Booking;
 import br.edu.utfpr.turismoapi.turismoapi.models.Payment;
 import br.edu.utfpr.turismoapi.turismoapi.repositories.BookingRepository;
 import br.edu.utfpr.turismoapi.turismoapi.repositories.PaymentRepository;
+import br.edu.utfpr.turismoapi.turismoapi.repositories.PersonRepository;
 
 @RestController
-@RequestMapping("/payment")
+@RequestMapping("/Payment")
 public class PaymentController {
     @Autowired
     private PaymentRepository paymentRepository;
+
     
     @Autowired
     private BookingRepository bookingRepository;
@@ -47,6 +49,7 @@ public class PaymentController {
     public ResponseEntity<Object> create(@RequestBody PaymentDTO paymentDTO) {
         try {
             Payment payment = new Payment();
+            
             BeanUtils.copyProperties(paymentDTO, payment);
             Optional<Booking> bookingOpt = bookingRepository.findById(paymentDTO.getReservaId());
             if (bookingOpt.isPresent()) {
