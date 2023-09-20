@@ -19,12 +19,13 @@ import org.springframework.web.filter.CorsFilter;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 
-@Configuration
-@EnableWebSecurity
-@RequiredArgsConstructor
+//@Configuration
+///@EnableWebSecurity
+//@RequiredArgsConstructor
 public class WebSecurityConfig {
 
-    private final JwtAuthenticationFilter jwtAuthenticationFilter;
+
+    private JwtAuthenticationFilter jwtAuthenticationFilter;
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
