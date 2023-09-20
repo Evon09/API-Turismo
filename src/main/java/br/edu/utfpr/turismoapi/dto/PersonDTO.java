@@ -29,11 +29,17 @@ public class PersonDTO {
     @Email(message = "Formato de e-mail inválido")
     private String email;
 
+    @NotBlank(message = "Senha é obrigatório!")
+    @Email(message = "Formato de senha inválido")
+    private String pasword;
+
     @PastOrPresent
     private LocalDateTime nascimento;
+
     @NotBlank(message= "CPF é obrigatório!")
     @Size(min=11, max =14, message = "O CPF/CNPJ deve ter entre 11 e 14 digitos. Digite apenas números")
     private String cpfCnpj;
+
     @NotNull(message = "Tipo é obrigatório")
     private TipoPessoaEnum tipo;
 }
