@@ -66,7 +66,7 @@ public class PersonController {
             : ResponseEntity.notFound().build();
     }
 
-    @PostMapping("")
+    @PostMapping("/")
     public ResponseEntity<Object> create(@Valid @RequestBody PersonDTO personDTO) {
         var pes = new Person(); 
         BeanUtils.copyProperties(personDTO, pes);
