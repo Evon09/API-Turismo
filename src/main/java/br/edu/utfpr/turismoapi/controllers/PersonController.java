@@ -35,23 +35,20 @@ import br.edu.utfpr.turismoapi.models.Person;
 import br.edu.utfpr.turismoapi.repositories.PersonRepository;
 import jakarta.validation.Valid;
 
-
 @RestController
-@RequestMapping("/Person")
+@RequestMapping("/person")
 public class PersonController {
     @Autowired
     PersonRepository personRepository;
 
     @GetMapping("/pages")
     public ResponseEntity<Page<Person>> getAllPage(
-        @PageableDefault(page=0, size=10, sort="name",
-            direction = Sort.Direction.ASC) Pageable pageable
-    ) {
+            @PageableDefault(page = 0, size = 10, sort = "name", direction = Sort.Direction.ASC) Pageable pageable) {
         return ResponseEntity.ok()
-            .body( personRepository.findAll(pageable) );
+                .body(personRepository.findAll(pageable));
     }
 
-    @GetMapping(value = {"", "/"})
+    @GetMapping(value = { "", "/" })
     public List<Person> getAll() {
         return personRepository.findAll();
     }
@@ -59,44 +56,46 @@ public class PersonController {
     @GetMapping("/{id}")
     public ResponseEntity<Object> getById(@PathVariable String id) {
         Optional<Person> personOpt = personRepository
-            .findById(UUID.fromString(id));
+                .findById(UUID.fromString(id));
 
-        return personOpt.isPresent() 
-            ? ResponseEntity.ok(personOpt.get())
-            : ResponseEntity.notFound().build();
+        return personOpt.isPresent()
+                ? ResponseEntity.ok(personOpt.get())
+                : ResponseEntity.notFound().build();
     }
 
-    @PostMapping("/")
+    @PostMapping
     public ResponseEntity<Object> create(@Valid @RequestBody PersonDTO personDTO) {
-        var pes = new Person(); 
+        System.out.println(personDTO);
+        var pes = new Person();
         BeanUtils.copyProperties(personDTO, pes);
 
         try {
             return ResponseEntity
-            .status(HttpStatus.CREATED)
-            .body( personRepository.save(pes) );
-        } catch(Exception e) {
+                    .status(HttpStatus.CREATED)
+                    .body(personRepository.save(pes));
+        } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity
-                .status(HttpStatus.BAD_REQUEST)
-                .body("Falha ao criar pessoa");
+                    .status(HttpStatus.BAD_REQUEST)
+                    .body("Falha ao criar pessoa");
         }
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Object> update(@PathVariable String id, 
-                    @Valid @RequestBody PersonDTO personDTO) {
+    public ResponseEntity<Object> update(@PathVariable String id,
+            @Valid @RequestBody PersonDTO personDTO) {
         UUID uuid;
-        try { uuid = UUID.fromString(id); }
-        catch(Exception e) {
+        try {
+            uuid = UUID.fromString(id);
+        } catch (Exception e) {
             return ResponseEntity
-                .badRequest()
-                .body("Formato de UUID inválido");
+                    .badRequest()
+                    .body("Formato de UUID inválido");
         }
 
         var person = personRepository.findById(uuid);
 
-        if(person.isEmpty())
+        if (person.isEmpty())
             return ResponseEntity.notFound().build();
 
         var personToUpdate = person.get();
@@ -105,41 +104,40 @@ public class PersonController {
 
         try {
             return ResponseEntity.ok()
-            .body( personRepository.save(personToUpdate));
-        } catch(Exception e) {
+                    .body(personRepository.save(personToUpdate));
+        } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity
-                .status(HttpStatus.BAD_REQUEST)
-                .body("Falha ao atualizar pessoa");
+                    .status(HttpStatus.BAD_REQUEST)
+                    .body("Falha ao atualizar pessoa");
         }
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Object> delete(@PathVariable String id) {
         UUID uuid;
-        try { 
-            uuid = UUID.fromString(id); 
-        }
-        catch(Exception e) {
+        try {
+            uuid = UUID.fromString(id);
+        } catch (Exception e) {
             return ResponseEntity
-                .badRequest()
-                .body("Formato de UUID inválido");
+                    .badRequest()
+                    .body("Formato de UUID inválido");
         }
 
         var person = personRepository.findById(uuid);
 
-        if(person.isEmpty())
+        if (person.isEmpty())
             return ResponseEntity.notFound().build();
 
         try {
             personRepository.delete(person.get());
             return ResponseEntity.ok().build();
-        } catch(Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
 
             return ResponseEntity
-                .status(HttpStatus.INTERNAL_SERVER_ERROR)
-                .body(e.getMessage());
+                    .status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(e.getMessage());
         }
     }
 
