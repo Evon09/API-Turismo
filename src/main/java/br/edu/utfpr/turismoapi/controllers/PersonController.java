@@ -44,7 +44,7 @@ public class PersonController {
 
     @GetMapping("/pages")
     public ResponseEntity<Page<Person>> getAllPage(
-        @PageableDefault(page=0, size=10, sort="nome",
+        @PageableDefault(page=0, size=10, sort="name",
             direction = Sort.Direction.ASC) Pageable pageable
     ) {
         return ResponseEntity.ok()

@@ -25,7 +25,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @Table(name = "tb_person")
 public class Person extends BaseModel implements UserDetails{
-    private String nome;
+    private String name;
 
     private String email;
 

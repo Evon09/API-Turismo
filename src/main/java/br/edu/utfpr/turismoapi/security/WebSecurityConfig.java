@@ -19,9 +19,9 @@ import org.springframework.web.filter.CorsFilter;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 
-//@Configuration
-///@EnableWebSecurity
-//@RequiredArgsConstructor
+// @Configuration
+// @EnableWebSecurity
+// @RequiredArgsConstructor
 public class WebSecurityConfig {
 
 

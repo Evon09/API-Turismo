@@ -23,7 +23,7 @@ public class PersonDTO {
     @NotBlank(message = "Nome é obrigatório!")
     @Size(min = 2, max = 100, 
         message = "O nome deve ter entre 2 e 100 caracteres")
-    private String nome;
+    private String name;
 
     @NotBlank(message = "E-mail é obrigatório!")
     @Email(message = "Formato de e-mail inválido")
