@@ -5,7 +5,7 @@ plugins {
 }
 
 group = 'br.edu.utfpr.turismoapi'
-version = '0.0.1-SNAPSHOT'
+version = '0.0.1'
 
 java {
 	sourceCompatibility = '17'
@@ -20,17 +20,27 @@ configurations {
 repositories {
 	mavenCentral()
 }
+// jar {
+//     manifest {
+//         attributes(
+//             'Main-Class': 'br.edu.utfpr.turismoapi.turismoapi.TurismoApiApplication' // Substitua pelo caminho da sua classe principal
+//         )
+//     }
+    
+//     archiveFileName = 'app.jar' // Defina o novo nome do arquivo JAR
+// }
+
 
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-	implementation 'org.springframework.boot:spring-boot-starter-security'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.springframework.boot:spring-boot-starter-security'
 	implementation 'org.springframework.boot:spring-boot-starter-validation'
 	implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.2.0'
-	implementation 'com.auth0:java-jwt:4.4.0'
 	compileOnly 'org.projectlombok:lombok'
+	implementation 'com.auth0:java-jwt:4.4.0'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
-	runtimeOnly 'org.postgresql:postgresql:42.3.1'
+	runtimeOnly 'org.postgresql:postgresql'
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.springframework.security:spring-security-test'
